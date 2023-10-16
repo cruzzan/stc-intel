@@ -1,5 +1,7 @@
 package Entities
 
+import "math"
+
 type Club struct {
 	Name    string `json:"name"`
 	Id      int    `json:"id"`
@@ -19,4 +21,8 @@ func (c *Club) CountFullyBookedClasses() int {
 	}
 
 	return fullyBooked
+}
+
+func (c *Club) GetFullyBookedPercentage() int {
+	return int(math.Round((float64(c.CountFullyBookedClasses()) / float64(c.CountClasses())) * 100))
 }

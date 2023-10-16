@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/cruzzan/stc-intel/StcStatistics/Entities"
-	"math"
 	"net/http"
 	"net/url"
 	"time"
@@ -75,8 +74,7 @@ func (s *Service) FullyBookedPercentage() ([]FullyBookedPercentage, error) {
 	var res []FullyBookedPercentage
 	for _, club := range s.clubs {
 		if club.CountClasses() > 0 {
-			percentage := math.Round((float64(club.CountFullyBookedClasses()) / float64(club.CountClasses())) * 100)
-			res = append(res, FullyBookedPercentage{Club: club.Name, FullyBookedPercentage: int(percentage)})
+			res = append(res, FullyBookedPercentage{Club: club.Name, FullyBookedPercentage: club.GetFullyBookedPercentage()})
 		}
 	}
 
